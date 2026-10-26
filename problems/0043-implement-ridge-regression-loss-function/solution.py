@@ -1,9 +1,20 @@
-import numpy as np
+import torch
 
-def ridge_loss(
-	X: np.ndarray, w: np.ndarray, y_true: np.ndarray, alpha: float) -> float:
-	# Your code here
-	l2 = alpha * np.dot(w,w)
-	y_pred = np.dot(X, w)
-	mse = np.mean((y_true - y_pred) ** 2)
-	return mse + l2
+def ridge_loss(X: torch.Tensor, w: torch.Tensor, y_true: torch.Tensor, alpha: float) -> torch.Tensor:
+    """
+    Implements the Ridge Regression Loss Function using PyTorch.
+    
+    Args:
+        X: Feature matrix of shape (n_samples, n_features)
+        w: Weight vector of shape (n_features,)
+        y_true: True target values of shape (n_samples,)
+        alpha: Regularization parameter (lambda)
+    
+    Returns:
+        The Ridge loss value as a scalar tensor
+    """
+    # Your implementation here
+    l2 = alpha * torch.matmul(w,w)
+	y_pred = torch.matmul(X, w)
+	mse = torch.mean((y_true - y_pred) ** 2)
+    return mse + l2
